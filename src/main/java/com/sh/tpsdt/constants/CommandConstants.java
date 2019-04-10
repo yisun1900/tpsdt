@@ -3,7 +3,7 @@ package com.sh.tpsdt.constants;
 /**
  * @program: tpsdt
  * @description:
- * @author: yi.sun
+ * @author:
  * @create: 2019-03-14 14:21
  **/
 public interface CommandConstants {
@@ -17,5 +17,4 @@ public interface CommandConstants {
     String COMMAND_PERSON_PREFER_TITLE = "个人信息相关：";
 
     String COMMAND_POINT_TITLE = "口令强弱：";
-
 }
