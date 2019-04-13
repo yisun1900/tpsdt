@@ -1,6 +1,7 @@
 package com.sh.tpsdt.algorithm;
 
 import com.sh.tpsdt.constants.CommandConstants;
+import com.sh.tpsdt.constants.PasswordLevel;
 
 /**
  * @program: tpsdt
@@ -10,9 +11,12 @@ import com.sh.tpsdt.constants.CommandConstants;
  **/
 public class PointAlgorithm implements CommandAlgorithm {
 
+    RecommendAlogrithm recommendAlogrithm = new RecommendAlogrithm();
+
     @Override
     public String validateCommand(String command) {
-        return CommandConstants.COMMAND_POINT_TITLE + "";
+        PasswordLevel level = PasswordLevel.LOW;
+        return CommandConstants.COMMAND_POINT_TITLE + "&&" +
+                (level.equals(PasswordLevel.LOW) ? recommendAlogrithm.recommendPassword() : "");
     }
-
 }

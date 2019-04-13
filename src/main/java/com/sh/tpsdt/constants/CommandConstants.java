@@ -17,4 +17,6 @@ public interface CommandConstants {
     String COMMAND_PERSON_PREFER_TITLE = "个人信息相关：";
 
     String COMMAND_POINT_TITLE = "口令强弱：";
+
+    String COMMAND_RECOMMEND = "推荐口令：";
 }
