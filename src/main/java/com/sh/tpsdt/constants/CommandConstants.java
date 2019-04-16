@@ -31,7 +31,7 @@ public interface CommandConstants {
 
     String COMMAND_RECOMMEND = "推荐口令：";
 
-    String COMMAND_HEAT_STRUCTURE_TITLE = "==== 基于热词与结构攻击算法：";
+    String COMMAND_HEAT_STRUCTURE_TITLE = "==== 基于热词与结构攻击算法评估：";
 
     String AZ_VOWEL = "[aoeiu]";
 
