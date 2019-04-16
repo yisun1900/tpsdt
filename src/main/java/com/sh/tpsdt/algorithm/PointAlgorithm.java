@@ -9,14 +9,21 @@ import com.sh.tpsdt.constants.PasswordLevel;
  * @author:
  * @create: 2019-03-14 14:47
  **/
-public class PointAlgorithm implements CommandAlgorithm {
+public class PointAlgorithm implements CommandAlgorithm, EstimateAlgorithm {
 
-    RecommendAlogrithm recommendAlogrithm = new RecommendAlogrithm();
+    RecommendAlgorithm recommendAlgorithm = new RecommendAlgorithm();
 
     @Override
     public String validateCommand(String command) {
-        PasswordLevel level = PasswordLevel.LOW;
-        return CommandConstants.COMMAND_POINT_TITLE + "&&" +
-                (level.equals(PasswordLevel.LOW) ? recommendAlogrithm.recommendPassword() : "");
+        PasswordLevel level = this.estimatePasswordLevel(command);
+        Boolean whetherRecommend = level.equals(PasswordLevel.LOW);
+        return CommandConstants.COMMAND_POINT_TITLE + level.name() +
+                (whetherRecommend ?
+                        "," + CommandConstants.COMMAND_RECOMMEND + recommendAlgorithm.recommendPassword() : "");
+    }
+
+    @Override
+    public PasswordLevel estimatePasswordLevel(String command) {
+        return PasswordLevel.LOW;
     }
 }

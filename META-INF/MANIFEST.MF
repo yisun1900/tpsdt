@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Class-Path: lombok-1.18.6.jar commons-lang3-3.8.1.jar
+Main-Class: com.sh.tpsdt.TpsdtApplication
+

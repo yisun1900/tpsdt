@@ -27,9 +27,11 @@ public interface CommandConstants {
 
     String COMMAND_PERSON_PREFER_TITLE = "==== 个人信息相关：";
 
-    String COMMAND_POINT_TITLE = "==== 口令强弱：";
+    String COMMAND_POINT_TITLE = "==== 综合口令强弱：";
 
-    String COMMAND_RECOMMEND = "==== 推荐口令：";
+    String COMMAND_RECOMMEND = "推荐口令：";
+
+    String COMMAND_HEAT_STRUCTURE_TITLE = "==== 基于热词与结构攻击算法：";
 
     String AZ_VOWEL = "[aoeiu]";
 
@@ -41,7 +43,27 @@ public interface CommandConstants {
 
     String NUM09 = "[0-9]";
 
+    String AZ_UPPER = "[ABCDEFGHIJKLMNOPQRSTUVWXYZ]";
+
+    String AZ_LOWER = "[abcdefghijklmnopqrstuvwxyz]";
+
     String SP = "[._!-*@#/$,+&\\)=?(';]%<~[:^`\">{}|]";
+
+    String SP_HIGH = "[._!-*@#/]";
+
+    String SP_LOW = "[$,+&\\)=?(';]%<~[:^`\">{}|]";
+
+    String AZ_VOWEL_TITLE = "元音字母";
+
+    String AZ_HIGH_TITLE = "高频小写字母";
+
+    String AZ_LOW_TITLE = "低频小写字母";
+
+    String AZ_TITLE = "大写字母";
+
+    String NUM09_TITLE = "数字";
+
+    String SP_TITLE = "键盘特殊字符";
 
     List<BruteMeterRule> bruteMeterRule = Arrays.asList(
             new BruteMeterRule(1, NUM09, 10d, 1),
