@@ -178,6 +178,8 @@ public interface CommandConstants {
             //SUPER LOW =================================================================================================================
             new HeatStructRule(6, NUM09 + "{6}", Math.pow(10, 6), 1),
             new HeatStructRule(7, NUM09 + "{7}", Math.pow(10, 7), 2),
+            new HeatStructRule(8, NUM09 + "{8}", Math.pow(10, 7), 2),
+            new HeatStructRule(8, NUM09 + "{5}", Math.pow(10, 7), 2),
             new HeatStructRule(7, AZ_LOWER + "{5}" + NUM09 + "{2} ", 2.984 * Math.pow(10, 5), 3),
             new HeatStructRule(6, AZ_LOWER + "{2}" + NUM09 + "{4}", 6.67 * Math.pow(10, 6), 4),
             new HeatStructRule(6, AZ_LOWER + "{4}" + NUM09 + "{2} ", 5.62 * Math.pow(10, 5), 5),

@@ -5,5 +5,6 @@ public enum PasswordLevel {
     HIGH,
     MEDIUM,
     LOW,
-    SUPER_LOW
+    SUPER_LOW,
+    UNKNOW
 }

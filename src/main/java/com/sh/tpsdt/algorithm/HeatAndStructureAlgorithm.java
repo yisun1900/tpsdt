@@ -4,6 +4,8 @@ import com.sh.tpsdt.constants.CommandConstants;
 import com.sh.tpsdt.constants.PasswordLevel;
 import com.sh.tpsdt.model.heat_structure.HeatStructRule;
 
+import java.util.Optional;
+
 public class HeatAndStructureAlgorithm extends AbstractRuleAlgorithm<HeatStructRule>
         implements CommandAlgorithm, EstimateAlgorithm {
 
@@ -23,8 +25,10 @@ public class HeatAndStructureAlgorithm extends AbstractRuleAlgorithm<HeatStructR
 
     @Override
     protected HeatStructRule hitTheTarget(String command) {
-        return CommandConstants.HEAT_STRUCT_RULE.stream().filter(heatStructRule ->
-                (heatStructRule.getLength().equals(command.length()) || heatStructRule.getLength() == 0)
-                        && command.matches(heatStructRule.getRulePattern())).findFirst().get();
+        Optional<HeatStructRule> optional = CommandConstants.HEAT_STRUCT_RULE.stream().filter(heatStructRule ->
+                (heatStructRule.getLength().equals(command.length()) || heatStructRule.getLength() == 0
+                        || heatStructRule.getLength() > 8)
+                        && command.matches(heatStructRule.getRulePattern())).findFirst();
+        return optional.isPresent() ? optional.get() : new HeatStructRule(command.length(), "*", 0d, 0);
     }
 }
