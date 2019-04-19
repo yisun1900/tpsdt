@@ -16,11 +16,15 @@ import java.util.List;
 public class ValidateCommandService {
 
     private LengthAlgorithm lengthAlgorithm = new LengthAlgorithm();
+
     private BruteMeterAlgorithm bruteMeterAlgorithm = new BruteMeterAlgorithm();
+
     private HeatAndStructureAlgorithm heatAndStructureAlgorithm = new HeatAndStructureAlgorithm();
+
     private PointAlgorithm pointAlgorithm = new PointAlgorithm();
+
     private RecommendAlgorithm recommendAlgorithm =
-            new RecommendAlgorithm(bruteMeterAlgorithm, heatAndStructureAlgorithm);
+            new RecommendAlgorithm(pointAlgorithm, bruteMeterAlgorithm, heatAndStructureAlgorithm);
 
     private List<CommandAlgorithm> commandAlgorithmList = Arrays.asList(
             lengthAlgorithm, bruteMeterAlgorithm, heatAndStructureAlgorithm, pointAlgorithm, recommendAlgorithm

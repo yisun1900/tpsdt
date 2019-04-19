@@ -17,17 +17,14 @@ import java.util.stream.Stream;
 @Setter
 public class RecommendAlgorithm implements CommandAlgorithm, EstimateAlgorithm {
 
-    private BruteMeterAlgorithm bruteMeterAlgorithm;
+    private PointAlgorithm pointAlgorithm;
 
-    private HeatAndStructureAlgorithm heatAndStructureAlgorithm;
-
-    public RecommendAlgorithm() {
-    }
-
-    public RecommendAlgorithm(BruteMeterAlgorithm bruteMeterAlgorithm,
+    public RecommendAlgorithm(PointAlgorithm pointAlgorithm,
+                              BruteMeterAlgorithm bruteMeterAlgorithm,
                               HeatAndStructureAlgorithm heatAndStructureAlgorithm) {
-        this.bruteMeterAlgorithm = bruteMeterAlgorithm;
-        this.heatAndStructureAlgorithm = heatAndStructureAlgorithm;
+        this.pointAlgorithm = pointAlgorithm;
+        this.pointAlgorithm.setBruteMeterAlgorithm(bruteMeterAlgorithm);
+        this.pointAlgorithm.setHeatAndStructureAlgorithm(heatAndStructureAlgorithm);
     }
 
     public String trimBracket(String source) {
@@ -151,20 +148,7 @@ public class RecommendAlgorithm implements CommandAlgorithm, EstimateAlgorithm {
 
     @Override
     public PasswordLevel estimatePasswordLevel(String command) {
-        PasswordLevel bruteMeterLevel = bruteMeterAlgorithm.estimatePasswordLevel(command);
-        PasswordLevel heatAndStructureLevel = heatAndStructureAlgorithm.estimatePasswordLevel(command);
-        PasswordLevel estimatePasswordLevel;
-        if ((bruteMeterLevel.equals(PasswordLevel.LOW) || bruteMeterLevel.equals(PasswordLevel.SUPER_LOW)) &&
-                (heatAndStructureLevel.equals(PasswordLevel.LOW) ||
-                        heatAndStructureLevel.equals(PasswordLevel.SUPER_LOW))) {
-            estimatePasswordLevel = PasswordLevel.LOW;
-        } else if (bruteMeterLevel.equals(PasswordLevel.MEDIUM) &&
-                heatAndStructureLevel.equals(PasswordLevel.MEDIUM)) {
-            estimatePasswordLevel = PasswordLevel.MEDIUM;
-        } else {
-            estimatePasswordLevel = PasswordLevel.HIGH;
-        }
-        return estimatePasswordLevel;
+        return this.pointAlgorithm.estimatePasswordLevel(command);
     }
 
     @Override
