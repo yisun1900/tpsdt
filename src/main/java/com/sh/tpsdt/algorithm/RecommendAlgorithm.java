@@ -40,4 +40,10 @@ public class RecommendAlgorithm {
         Collections.shuffle(passwordList);
         return passwordList.stream().collect(Collectors.joining(""));
     }
+
+    public static void main(String args[]) {
+        RecommendAlgorithm recommendAlgorithm = new RecommendAlgorithm();
+        while (true)
+            System.out.println(recommendAlgorithm.recommendPassword());
+    }
 }

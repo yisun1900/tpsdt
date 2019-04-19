@@ -6,6 +6,8 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @program: tpsdt
@@ -19,9 +21,9 @@ public class ValidateCommandService {
             new LengthAlgorithm(),
             new BruteMeterAlgorithm(),
             new HeatAndStructureAlgorithm(),
-            new GrammarAlgorithm(),
-            new SyntacticAlgorithm(),
-            new PersonPreferAlgorithm(),
+//            new GrammarAlgorithm(),
+//            new SyntacticAlgorithm(),
+//            new PersonPreferAlgorithm(),
             new PointAlgorithm()
     );
 
@@ -32,7 +34,7 @@ public class ValidateCommandService {
     }
 
     public List<String> validateCommand() {
-        while (true) {
+/*        while (true) {
             try {
                 this.printTpsdtWelcome();
                 String password = new BufferedReader(new InputStreamReader(System.in)).readLine();
@@ -41,8 +43,17 @@ public class ValidateCommandService {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }
-        //        while (true)
-//            System.out.println(RandomUtils.nextInt(0, 7));
+        }*/
+//                while (true)
+        return null;
+
+    }
+
+    public static void main(String... args){
+//        System.out.println("11111".matches("([0-9a-zA-Z])$1{5}"));
+        Pattern pattern1 = Pattern.compile("(\\d)\\1{5}");
+        Pattern pattern2 = Pattern.compile("([\\d])\\1{3}");
+        Matcher matcher = pattern1.matcher("11111");
+        System.out.println(matcher.matches()); //true
     }
 }
