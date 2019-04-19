@@ -7,12 +7,12 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class HeatStructureRule extends CommonRule {
+public class HeatStructRule extends CommonRule {
 
-    public HeatStructureRule() {
+    public HeatStructRule() {
     }
 
-    public HeatStructureRule(Integer length, String rulePattern, Double totalSpace, Integer order) {
+    public HeatStructRule(Integer length, String rulePattern, Double totalSpace, Integer order) {
         this.order = order;
         this.length = length;
         this.rulePattern = rulePattern;
@@ -21,15 +21,15 @@ public class HeatStructureRule extends CommonRule {
     }
 
     protected void evaluatePasswordLevel() {
-        if (this.totalSpace < HeatStructureStandard.SUPER_LOW) {
+        if (this.totalSpace < HeatStructStandard.SUPER_LOW) {
             this.passwordLevel = PasswordLevel.SUPER_LOW;
-        } else if (this.totalSpace >= HeatStructureStandard.SUPER_LOW && this.totalSpace < HeatStructureStandard.LOW) {
+        } else if (this.totalSpace >= HeatStructStandard.SUPER_LOW && this.totalSpace < HeatStructStandard.LOW) {
             this.passwordLevel = PasswordLevel.LOW;
-        } else if (this.totalSpace >= HeatStructureStandard.LOW && this.totalSpace < HeatStructureStandard.MEDIUM) {
+        } else if (this.totalSpace >= HeatStructStandard.LOW && this.totalSpace < HeatStructStandard.MEDIUM) {
             this.passwordLevel = PasswordLevel.MEDIUM;
-        } else if (this.totalSpace >= HeatStructureStandard.MEDIUM && this.totalSpace < HeatStructureStandard.HIGH) {
+        } else if (this.totalSpace >= HeatStructStandard.MEDIUM && this.totalSpace < HeatStructStandard.HIGH) {
             this.passwordLevel = PasswordLevel.HIGH;
-        } else if (this.totalSpace >= HeatStructureStandard.HIGH && this.totalSpace < HeatStructureStandard.SUPER_HIGH) {
+        } else if (this.totalSpace >= HeatStructStandard.HIGH && this.totalSpace < HeatStructStandard.SUPER_HIGH) {
             this.passwordLevel = PasswordLevel.SUPER_HIGH;
         } else {
             this.passwordLevel = PasswordLevel.SUPER_HIGH;
