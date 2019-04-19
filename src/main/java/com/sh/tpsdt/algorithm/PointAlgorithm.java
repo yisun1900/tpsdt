@@ -20,6 +20,7 @@ public class PointAlgorithm implements CommandAlgorithm, EstimateAlgorithm {
         return CommandConstants.COMMAND_POINT_TITLE + level.name() +
                 (whetherRecommend ?
                         " ," + CommandConstants.COMMAND_RECOMMEND + recommendAlgorithm.recommendPassword() : "");
+
     }
 
     @Override

@@ -1,6 +1,8 @@
 package com.sh.tpsdt.algorithm;
 
 import com.sh.tpsdt.constants.CommandConstants;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * @program: tpsdt
@@ -8,16 +10,19 @@ import com.sh.tpsdt.constants.CommandConstants;
  * @author:
  * @create: 2019-03-14 13:54
  **/
+@Getter
+@Setter
 public class SyntacticAlgorithm implements CommandAlgorithm {
+
+    private int AZ_VOWEL_NUM = 0;
+    private int AZ_HIGH_NUM = 0;
+    private int AZ_LOW_NUM = 0;
+    private int AZ_NUM = 0;
+    private int NUM09 = 0;
+    private int SP_NUM = 0;
 
     @Override
     public String validateCommand(String command) {
-        int AZ_VOWEL_NUM = 0;
-        int AZ_HIGH_NUM = 0;
-        int AZ_LOW_NUM = 0;
-        int AZ_NUM = 0;
-        int NUM09 = 0;
-        int SP_NUM = 0;
         String[] elementList = command.split("");
         for (String element : elementList) {
             if (element.matches(CommandConstants.AZ_VOWEL)) {
@@ -42,6 +47,4 @@ public class SyntacticAlgorithm implements CommandAlgorithm {
                 CommandConstants.NUM09_TITLE + ":" + NUM09 + "个, " +
                 CommandConstants.SP_TITLE + ":" + SP_NUM + "个";
     }
-
-
 }

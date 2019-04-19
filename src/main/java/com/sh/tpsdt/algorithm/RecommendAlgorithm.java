@@ -1,14 +1,34 @@
 package com.sh.tpsdt.algorithm;
 
 import com.sh.tpsdt.constants.CommandConstants;
+import com.sh.tpsdt.constants.PasswordLevel;
+import lombok.Getter;
+import lombok.Setter;
 import org.apache.commons.lang3.RandomUtils;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-public class RecommendAlgorithm {
+@Getter
+@Setter
+public class RecommendAlgorithm implements CommandAlgorithm, EstimateAlgorithm {
+
+    private BruteMeterAlgorithm bruteMeterAlgorithm;
+
+    private HeatAndStructureAlgorithm heatAndStructureAlgorithm;
+
+    public RecommendAlgorithm() {
+    }
+
+    public RecommendAlgorithm(BruteMeterAlgorithm bruteMeterAlgorithm,
+                              HeatAndStructureAlgorithm heatAndStructureAlgorithm) {
+        this.bruteMeterAlgorithm = bruteMeterAlgorithm;
+        this.heatAndStructureAlgorithm = heatAndStructureAlgorithm;
+    }
 
     public String trimBracket(String source) {
         return source.substring(1, source.length() - 1);
@@ -41,9 +61,116 @@ public class RecommendAlgorithm {
         return passwordList.stream().collect(Collectors.joining(""));
     }
 
-    public static void main(String args[]) {
-        RecommendAlgorithm recommendAlgorithm = new RecommendAlgorithm();
-        while (true)
-            System.out.println(recommendAlgorithm.recommendPassword());
+    public String sortAllElement(String command) {
+        return Stream.of(command.split("")).sorted().collect(Collectors.joining(""));
+    }
+
+    public String removeSameElement(String command) {
+        return command.replaceAll("(.)\\1+", "$1");
+    }
+
+    public String reverseElement(String command) {
+        List<String> wordList = Stream.of(command.split("")).collect(Collectors.toList());
+        Collections.shuffle(wordList);
+        String newWord = wordList.stream().collect(Collectors.joining());
+        return newWord;
+    }
+
+    public String recommendPassword(String command) {
+        String distinctWord = this.sortAllElement(command);
+        String removeWord = this.removeSameElement(distinctWord);
+        String rebalanceWord = this.rebalanceElement(removeWord);
+        String reverseWord = this.reverseElement(rebalanceWord);
+        String completionWord = this.completionCommand(reverseWord);
+        return completionWord;
+    }
+
+    public String upgradeSafePhase(String command, PasswordLevel passwordLevel) {
+        switch (passwordLevel) {
+            case SUPER_LOW:
+            case LOW:
+                return recommendPassword();
+            case MEDIUM:
+                return this.recommendPassword(command);
+            case HIGH:
+            case SUPER_HIGH:
+            default:
+                return command;
+        }
+    }
+
+    public String completionCommand(String command) {
+        return command.length() < 8 ?
+                command + recommendPassword().substring(0, 8 - command.length()) : command.substring(0, 8);
+    }
+
+    public String removeUnBalanceElement(int unbalanceNum, String command, String rule) {
+        List<String> commandList = Stream.of(command.split("")).collect(Collectors.toList());
+        List<String> newList = new ArrayList<>();
+        for (int index = 0, size = commandList.size(); index < size; index++) {
+            if (commandList.get(index).matches(rule) && unbalanceNum > 0) {
+                unbalanceNum--;
+            } else {
+                newList.add(commandList.get(index));
+            }
+        }
+        return newList.stream().collect(Collectors.joining(""));
+    }
+
+    public String rebalanceElement(String command) {
+        Integer balanceNum = command.length() / 6 + 1;
+        SyntacticAlgorithm syntacticAlgorithm = new SyntacticAlgorithm();
+        syntacticAlgorithm.validateCommand(command);
+        String newCommand = "";
+        if (syntacticAlgorithm.getAZ_HIGH_NUM() > balanceNum) {
+            newCommand = this.removeUnBalanceElement(syntacticAlgorithm.getAZ_HIGH_NUM() - balanceNum,
+                    command, CommandConstants.AZ_HIGH);
+        }
+        if (syntacticAlgorithm.getAZ_LOW_NUM() > balanceNum) {
+            newCommand = this.removeUnBalanceElement(syntacticAlgorithm.getAZ_LOW_NUM() - balanceNum,
+                    command, CommandConstants.AZ_LOW);
+        }
+        if (syntacticAlgorithm.getAZ_VOWEL_NUM() > balanceNum) {
+            newCommand = this.removeUnBalanceElement(syntacticAlgorithm.getAZ_VOWEL_NUM() - balanceNum,
+                    command, CommandConstants.AZ_VOWEL);
+        }
+        if (syntacticAlgorithm.getAZ_NUM() > balanceNum) {
+            newCommand = this.removeUnBalanceElement(syntacticAlgorithm.getAZ_NUM() - balanceNum,
+                    command, CommandConstants.AZ);
+        }
+        if (syntacticAlgorithm.getNUM09() > balanceNum) {
+            newCommand = this.removeUnBalanceElement(syntacticAlgorithm.getNUM09() - balanceNum,
+                    command, CommandConstants.NUM09);
+        }
+        if (syntacticAlgorithm.getSP_NUM() > balanceNum) {
+            newCommand = this.removeUnBalanceElement(syntacticAlgorithm.getSP_NUM() - balanceNum,
+                    command, CommandConstants.SP);
+        }
+        return newCommand;
+    }
+
+    @Override
+    public PasswordLevel estimatePasswordLevel(String command) {
+        PasswordLevel bruteMeterLevel = bruteMeterAlgorithm.estimatePasswordLevel(command);
+        PasswordLevel heatAndStructureLevel = heatAndStructureAlgorithm.estimatePasswordLevel(command);
+        PasswordLevel estimatePasswordLevel;
+        if ((bruteMeterLevel.equals(PasswordLevel.LOW) || bruteMeterLevel.equals(PasswordLevel.SUPER_LOW)) &&
+                (heatAndStructureLevel.equals(PasswordLevel.LOW) ||
+                        heatAndStructureLevel.equals(PasswordLevel.SUPER_LOW))) {
+            estimatePasswordLevel = PasswordLevel.LOW;
+        } else if (bruteMeterLevel.equals(PasswordLevel.MEDIUM) &&
+                heatAndStructureLevel.equals(PasswordLevel.MEDIUM)) {
+            estimatePasswordLevel = PasswordLevel.MEDIUM;
+        } else {
+            estimatePasswordLevel = PasswordLevel.HIGH;
+        }
+        return estimatePasswordLevel;
+    }
+
+    @Override
+    public String validateCommand(String command) {
+        PasswordLevel passwordLevel = this.estimatePasswordLevel(command);
+        return CommandConstants.COMMAND_POINT_TITLE + passwordLevel.name() + "," +
+                CommandConstants.COMMAND_RECOMMEND + this.upgradeSafePhase(command, passwordLevel);
     }
 }

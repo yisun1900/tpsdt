@@ -104,7 +104,7 @@ public interface CommandConstants {
             new BruteMeterRule(4, AZ_HIGH + AZ_VOWEL + AZ_HIGH + AZ_VOWEL, BruteMeterStandard.LOW, 32),
             new BruteMeterRule(2, AZ_HIGH + "{2}", BruteMeterStandard.LOW, 33),
             new BruteMeterRule(3, AZ_VOWEL + AZ_HIGH + AZ_VOWEL, BruteMeterStandard.LOW, 34),
-            new BruteMeterRule(5, AZ_HIGH + AZ_VOWEL + AZ_HIGH + AZ_VOWEL + AZ_HIGH,BruteMeterStandard.LOW, 35),
+            new BruteMeterRule(5, AZ_HIGH + AZ_VOWEL + AZ_HIGH + AZ_VOWEL + AZ_HIGH, BruteMeterStandard.LOW, 35),
             new BruteMeterRule(3, AZ_HIGH + AZ_VOWEL + "{2}", BruteMeterStandard.LOW, 36),
             new BruteMeterRule(2, AZ_HIGH + AZ_LOW, BruteMeterStandard.LOW, 37),
             new BruteMeterRule(2, AZ_VOWEL + AZ_LOW, BruteMeterStandard.LOW, 38),
@@ -178,8 +178,8 @@ public interface CommandConstants {
 
     List<HeatStructureRule> heatStructureRule = Arrays.asList(
             //SUPER LOW =================================================================================================================
-            new HeatStructureRule(1, NUM09, 10d, 1),
-            new HeatStructureRule(1, AZ_VOWEL, 15d, 2),
+            new HeatStructureRule(6, NUM09 + "{6}", Math.pow(10, 6), 1),
+            new HeatStructureRule(7, NUM09 + "{7}", Math.pow(10, 7), 2),
             new HeatStructureRule(1, AZ_HIGH, 24d, 3),
             new HeatStructureRule(1, AZ_LOW, 36d, 4),
             new HeatStructureRule(4, NUM09 + "{4}", 10036d, 5),
@@ -213,7 +213,7 @@ public interface CommandConstants {
             new HeatStructureRule(4, AZ_HIGH + AZ_VOWEL + AZ_HIGH + AZ_VOWEL, BruteMeterStandard.LOW, 32),
             new HeatStructureRule(2, AZ_HIGH + "{2}", BruteMeterStandard.LOW, 33),
             new HeatStructureRule(3, AZ_VOWEL + AZ_HIGH + AZ_VOWEL, BruteMeterStandard.LOW, 34),
-            new HeatStructureRule(5, AZ_HIGH + AZ_VOWEL + AZ_HIGH + AZ_VOWEL + AZ_HIGH,BruteMeterStandard.LOW, 35),
+            new HeatStructureRule(5, AZ_HIGH + AZ_VOWEL + AZ_HIGH + AZ_VOWEL + AZ_HIGH, BruteMeterStandard.LOW, 35),
             new HeatStructureRule(3, AZ_HIGH + AZ_VOWEL + "{2}", BruteMeterStandard.LOW, 36),
             new HeatStructureRule(2, AZ_HIGH + AZ_LOW, BruteMeterStandard.LOW, 37),
             new HeatStructureRule(2, AZ_VOWEL + AZ_LOW, BruteMeterStandard.LOW, 38),
