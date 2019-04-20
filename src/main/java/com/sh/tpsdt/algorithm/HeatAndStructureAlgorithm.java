@@ -26,9 +26,8 @@ public class HeatAndStructureAlgorithm extends AbstractRuleAlgorithm<HeatStructR
     @Override
     protected HeatStructRule hitTheTarget(String command) {
         Optional<HeatStructRule> optional = CommandConstants.HEAT_STRUCT_RULE.stream().filter(heatStructRule ->
-                (heatStructRule.getLength().equals(command.length()) || heatStructRule.getLength() == 0
-                        || heatStructRule.getLength() > 8)
-                        && command.matches(heatStructRule.getRulePattern())).findFirst();
+//                (heatStructRule.getLength().equals(command.length()) || heatStructRule.getLength() == 0 || heatStructRule.getLength() > 8) &&
+                        command.matches(heatStructRule.getRulePattern())).findFirst();
         return optional.isPresent() ? optional.get() : new HeatStructRule(command.length(), "*", 0d, 0);
     }
 }

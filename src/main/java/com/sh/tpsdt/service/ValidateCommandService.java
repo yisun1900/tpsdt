@@ -27,7 +27,7 @@ public class ValidateCommandService {
             new RecommendAlgorithm(pointAlgorithm, bruteMeterAlgorithm, heatAndStructureAlgorithm);
 
     private List<CommandAlgorithm> commandAlgorithmList = Arrays.asList(
-            lengthAlgorithm, bruteMeterAlgorithm, heatAndStructureAlgorithm, pointAlgorithm, recommendAlgorithm
+            lengthAlgorithm, bruteMeterAlgorithm, heatAndStructureAlgorithm, recommendAlgorithm
     );
 
     public void printTpsdtWelcome() {

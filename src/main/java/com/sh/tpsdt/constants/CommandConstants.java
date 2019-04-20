@@ -176,7 +176,7 @@ public interface CommandConstants {
 
     List<HeatStructRule> HEAT_STRUCT_RULE = Arrays.asList(
             //SUPER LOW =================================================================================================================
-            new HeatStructRule(6, NUM09 + "{6}", Math.pow(10, 6), 1),
+            new HeatStructRule(6, NUM09 + "{1,8}", Math.pow(10, 6), 1),
             new HeatStructRule(7, NUM09 + "{7}", Math.pow(10, 7), 2),
             new HeatStructRule(8, NUM09 + "{8}", Math.pow(10, 7), 2),
             new HeatStructRule(8, NUM09 + "{5}", Math.pow(10, 7), 2),

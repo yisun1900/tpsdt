@@ -11,8 +11,8 @@ public class BruteMeterAlgorithm extends AbstractRuleAlgorithm implements Comman
     @Override
     public BruteMeterRule hitTheTarget(String command) {
         Optional<BruteMeterRule> optional = CommandConstants.bruteMeterRule.stream().filter(bruteMeterRule ->
-                (bruteMeterRule.getLength().equals(command.length()) || bruteMeterRule.getLength() == 0)
-                        && command.matches(bruteMeterRule.getRulePattern())).findFirst();
+//                (bruteMeterRule.getLength().equals(command.length()) || bruteMeterRule.getLength() == 0) &&
+                        command.matches(bruteMeterRule.getRulePattern())).findFirst();
         return optional.isPresent() ? optional.get() : new BruteMeterRule(command.length(), "*", 0d, 0);
     }
 
