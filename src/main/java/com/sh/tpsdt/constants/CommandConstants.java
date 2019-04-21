@@ -68,9 +68,26 @@ public interface CommandConstants {
 
     String SP_TITLE = "键盘特殊字符";
 
+    String CHINESE_WORD = "/^[\\u4e00-\\u9fa5]+$/";
+
+    String DATE = "/((?!0000)[0-9]{4}-((0[1-9]|1[0-2])-(0[1-9]|1[0-9]|2[0-8])|(0[13-9]|1[0-2])-(29|30)|(0[13578]|1[02])-31)|([0-9]{2}(0[48]|[2468][048]|[13579][26])|(0[48]|[2468][048]|[13579][26])00)-02-29)/";
+
+    String EMAIL = "/[\\w!#$%&'*+/=?^_`{|}~-]+(?:\\.[\\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\\w](?:[\\w-]*[\\w])?\\.)+[\\w](?:[\\w-]*[\\w])?/";
+
+    String MAC = "/([A-Fa-f0-9]{2}-){5}[A-Fa-f0-9]{2}/";
+
+    String ID_CARD = "/^(\\d{6})(\\d{4})(\\d{2})(\\d{2})(\\d{3})([0-9]|X)$/";
+
+    String IP = "/((25[0-5]|2[0-4]\\d|((1\\d{2})|([1-9]?\\d)))\\.){3}(25[0-5]|2[0-4]\\d|((1\\d{2})|([1-9]?\\d)))/";
+
     List<BruteMeterRule> bruteMeterRule = Arrays.asList(
             //SUPER LOW =================================================================================================================
-            new BruteMeterRule(1, NUM09, 10d, 1),
+            new BruteMeterRule(0, CHINESE_WORD+"+", 10d, 1),
+            new BruteMeterRule(0, EMAIL, 10d, 1),
+            new BruteMeterRule(0, MAC, 10d, 1),
+            new BruteMeterRule(0, ID_CARD, 10d, 1),
+            new BruteMeterRule(0, IP, 10d, 1),
+            new BruteMeterRule(0, DATE, 10d, 1),
             new BruteMeterRule(1, AZ_VOWEL, 15d, 2),
             new BruteMeterRule(1, AZ_HIGH, 24d, 3),
             new BruteMeterRule(1, AZ_LOW, 36d, 4),
@@ -154,7 +171,7 @@ public interface CommandConstants {
             new BruteMeterRule(7, SP + "{2}" + NUM09 + "{2}" + SP + "{2}" + AZ_VOWEL, BruteMeterStandard.HIGH, 89),
             new BruteMeterRule(7, AZ_LOW + SP + "{2}" + AZ_VOWEL + AZ_HIGH + SP + "{2}", BruteMeterStandard.HIGH, 90),
             //SUPER HIGH==================================================================================================================
-            new BruteMeterRule(0, "^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z._!-*@#/$,+&\\)=?(';]%<~[:^`\">{}|]{8,16}$", BruteMeterStandard.SUPER_HIGH, 91)
+            new BruteMeterRule(0, "^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z._!-\\*@#/$,+&\\)=?(';]%<~[:^`\">{}|]{8,16}$", BruteMeterStandard.SUPER_HIGH, 91)
     );
 
     String NA_3 = "(Abe|Aly|Ann|Ben|Bob|Dan|Eva|Eve|Fox|Gus|Guy|Hal|Jim|Job|Joe|Kit|Law|Lee|Lew|Max|May|Meg|Peg|Poe|Rob|Roy|Sam|Ted|Tom|Van|Wat)";
@@ -176,10 +193,26 @@ public interface CommandConstants {
 
     List<HeatStructRule> HEAT_STRUCT_RULE = Arrays.asList(
             //SUPER LOW =================================================================================================================
-            new HeatStructRule(6, NUM09 + "{1,8}", Math.pow(10, 6), 1),
-            new HeatStructRule(7, NUM09 + "{7}", Math.pow(10, 7), 2),
-            new HeatStructRule(8, NUM09 + "{8}", Math.pow(10, 7), 2),
-            new HeatStructRule(8, NUM09 + "{5}", Math.pow(10, 7), 2),
+            new HeatStructRule(8, NUM09 + "{1,8}", Math.pow(10, 6), 1),
+            new HeatStructRule(8, AZ_LOWER + "{1,8}", Math.pow(10, 6), 1),
+            new HeatStructRule(8, AZ_VOWEL + "{1,8}", Math.pow(10, 6), 1),
+            new HeatStructRule(8, AZ_HIGH + "{1,8}", Math.pow(10, 6), 1),
+            new HeatStructRule(8, SP + "{1,8}", Math.pow(10, 6), 1),
+            new HeatStructRule(3, NA_3, Math.pow(10, 7), 2),
+            new HeatStructRule(4, NA_4, Math.pow(10, 7), 2),
+            new HeatStructRule(5, NA_5, Math.pow(10, 7), 2),
+            new HeatStructRule(5, NA_7, Math.pow(10, 7), 2),
+            new HeatStructRule(5, NA_8, Math.pow(10, 7), 2),
+            new HeatStructRule(5, NA_9, Math.pow(10, 7), 2),
+            new HeatStructRule(5, NA_10, Math.pow(10, 7), 2),
+            new HeatStructRule(5, NA_11, Math.pow(10, 7), 2),
+            new HeatStructRule(5, HeatWord_4, Math.pow(10, 7), 2),
+            new HeatStructRule(5, HeatWord_5, Math.pow(10, 7), 2),
+            new HeatStructRule(5, HeatWord_6, Math.pow(10, 7), 2),
+            new HeatStructRule(5, HeatWord_7, Math.pow(10, 7), 2),
+            new HeatStructRule(5, HeatWord_8, Math.pow(10, 7), 2),
+            new HeatStructRule(5, HeatWord_9, Math.pow(10, 7), 2),
+            new HeatStructRule(5, HeatWord_7, Math.pow(10, 7), 2),
             new HeatStructRule(7, AZ_LOWER + "{5}" + NUM09 + "{2} ", 2.984 * Math.pow(10, 5), 3),
             new HeatStructRule(6, AZ_LOWER + "{2}" + NUM09 + "{4}", 6.67 * Math.pow(10, 6), 4),
             new HeatStructRule(6, AZ_LOWER + "{4}" + NUM09 + "{2} ", 5.62 * Math.pow(10, 5), 5),
@@ -262,6 +295,6 @@ public interface CommandConstants {
             new HeatStructRule(7, SP + "{2}" + NUM09 + "{2}" + SP + "{2}" + AZ_VOWEL, HeatStructStandard.HIGH, 89),
             new HeatStructRule(7, AZ_LOW + SP + "{2}" + AZ_VOWEL + AZ_HIGH + SP + "{2}", HeatStructStandard.HIGH, 90),
             //SUPER HIGH==================================================================================================================
-            new HeatStructRule(0, "^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z._!-*@#/$,+&\\)=?(';]%<~[:^`\">{}|]{8,16}$", HeatStructStandard.SUPER_HIGH, 91)
+            new HeatStructRule(0, "^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z._!\\-\\*@#/$,+&\\)=?(';]%<~[:^`\">{}|]{8,16}$", HeatStructStandard.SUPER_HIGH, 91)
     );
 }
