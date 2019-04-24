@@ -80,14 +80,25 @@ public interface CommandConstants {
 
     String IP = "/((25[0-5]|2[0-4]\\d|((1\\d{2})|([1-9]?\\d)))\\.){3}(25[0-5]|2[0-4]\\d|((1\\d{2})|([1-9]?\\d)))/";
 
+    String TIMER_24 = "0[0-9]:[0-5][0-9]|1[0-9]:[0-5][0-9]|2[0-3]:[0-5][0-9]";
+
+    String TIMER_12 = "0[0-9]:[0-5][0-9]|1[0-1]:[0-5][0-9]";
+
     List<BruteMeterRule> bruteMeterRule = Arrays.asList(
             //SUPER LOW =================================================================================================================
-            new BruteMeterRule(0, CHINESE_WORD+"+", 10d, 1),
+            new BruteMeterRule(8, NUM09 + "{1,8}", Math.pow(10, 6), 1),
+            new BruteMeterRule(8, AZ_LOWER + "{1,8}", Math.pow(10, 6), 1),
+            new BruteMeterRule(8, AZ_VOWEL + "{1,8}", Math.pow(10, 6), 1),
+            new BruteMeterRule(8, AZ_HIGH + "{1,8}", Math.pow(10, 6), 1),
+            new BruteMeterRule(8, SP + "{1,8}", Math.pow(10, 6), 1),
+            new BruteMeterRule(0, CHINESE_WORD + "+", 10d, 1),
             new BruteMeterRule(0, EMAIL, 10d, 1),
             new BruteMeterRule(0, MAC, 10d, 1),
             new BruteMeterRule(0, ID_CARD, 10d, 1),
             new BruteMeterRule(0, IP, 10d, 1),
             new BruteMeterRule(0, DATE, 10d, 1),
+            new BruteMeterRule(0, TIMER_24, 10d, 1),
+            new BruteMeterRule(0, TIMER_12, 10d, 1),
             new BruteMeterRule(1, AZ_VOWEL, 15d, 2),
             new BruteMeterRule(1, AZ_HIGH, 24d, 3),
             new BruteMeterRule(1, AZ_LOW, 36d, 4),
