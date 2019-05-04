@@ -2,14 +2,14 @@ package com.sh.tpsdt.algorithm;
 
 import com.sh.tpsdt.constants.CommandConstants;
 import com.sh.tpsdt.constants.PasswordLevel;
-import com.sh.tpsdt.model.heat_structure.HeatStructRule;
+import com.sh.tpsdt.model.heat_structure.HeatStructureRule;
 
 import java.util.Optional;
 
-public class HeatAndStructureAlgorithm extends AbstractRuleAlgorithm<HeatStructRule>
+public class HeatAndStructureAlgorithm extends AbstractRuleAlgorithm<HeatStructureRule>
         implements CommandAlgorithm, EstimateAlgorithm {
 
-    private HeatStructRule result;
+    private HeatStructureRule result;
 
     @Override
     public String validateCommand(String command) {
@@ -24,10 +24,9 @@ public class HeatAndStructureAlgorithm extends AbstractRuleAlgorithm<HeatStructR
     }
 
     @Override
-    protected HeatStructRule hitTheTarget(String command) {
-        Optional<HeatStructRule> optional = CommandConstants.HEAT_STRUCT_RULE.stream().filter(heatStructRule ->
-//                (heatStructRule.getLength().equals(command.length()) || heatStructRule.getLength() == 0 || heatStructRule.getLength() > 8) &&
-                        command.matches(heatStructRule.getRulePattern())).findFirst();
-        return optional.isPresent() ? optional.get() : new HeatStructRule(command.length(), "*", 0d, 0);
+    protected HeatStructureRule hitTheTarget(String command) {
+        Optional<HeatStructureRule> optional = CommandConstants.HEAT_STRUCT_RULE.stream().filter(heatStructureRule ->
+                        command.matches(heatStructureRule.getRulePattern())).findFirst();
+        return optional.isPresent() ? optional.get() : new HeatStructureRule(command.length(), "*", 0d, 0);
     }
 }

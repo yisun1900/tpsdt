@@ -1,6 +1,6 @@
 package com.sh.tpsdt.model.heat_structure;
 
-public interface HeatStructStandard {
+public interface HeatStructureStandard {
 
     Double SUPER_LOW = Math.pow(10, 8);
 

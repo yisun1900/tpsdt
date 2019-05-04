@@ -27,4 +27,6 @@ public class CommonRule {
     protected Integer order;
 
     protected PasswordLevel passwordLevel;
+
+    protected String desc;
 }

@@ -9,7 +9,10 @@ import lombok.Setter;
 @Setter
 public class BruteMeterRule extends CommonRule {
 
-    public BruteMeterRule() {
+    public BruteMeterRule(String rulePattern, Double totalSpace, String desc) {
+        this.rulePattern = rulePattern;
+        this.totalSpace = totalSpace;
+        this.desc = desc;
     }
 
     public BruteMeterRule(Integer length, String rulePattern, Double totalSpace, Integer order) {
