@@ -9,24 +9,22 @@ import java.util.Optional;
 public class HeatAndStructureAlgorithm extends AbstractRuleAlgorithm<HeatStructureRule>
         implements CommandAlgorithm, EstimateAlgorithm {
 
-    private HeatStructureRule result;
+    @Override
+    protected HeatStructureRule hitTheTarget(String command) {
+        Optional<HeatStructureRule> optional = CommandConstants.HEAT_STRUCTURE_RULES.stream().filter(heatStructureRule ->
+                command.matches(heatStructureRule.getRulePattern())).findFirst();
+        return optional.isPresent() ? optional.get() : new HeatStructureRule(command.length(), "*", 0d, 0);
+    }
 
     @Override
     public String validateCommand(String command) {
-        result = this.hitTheTarget(command);
+        HeatStructureRule result = this.hitTheTarget(command);
         return CommandConstants.COMMAND_HEAT_STRUCTURE_TITLE + result.getPasswordLevel().name() + "," +
-                CommandConstants.COMMAND_SYNTACTIC_CONTENT + result.getRulePattern();
+                CommandConstants.COMMAND_SYNTACTIC_CONTENT + result.getRulePattern() + "," + result.getDesc();
     }
 
     @Override
     public PasswordLevel estimatePasswordLevel(String command) {
-        return PasswordLevel.LOW;
-    }
-
-    @Override
-    protected HeatStructureRule hitTheTarget(String command) {
-        Optional<HeatStructureRule> optional = CommandConstants.HEAT_STRUCTURE_RULES.stream().filter(heatStructureRule ->
-                        command.matches(heatStructureRule.getRulePattern())).findFirst();
-        return optional.isPresent() ? optional.get() : new HeatStructureRule(command.length(), "*", 0d, 0);
+        return this.hitTheTarget(command).getPasswordLevel();
     }
 }

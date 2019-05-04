@@ -11,7 +11,7 @@ public class BruteMeterAlgorithm extends AbstractRuleAlgorithm implements Comman
     @Override
     public BruteMeterRule hitTheTarget(String command) {
         Optional<BruteMeterRule> optional = CommandConstants.BRUTE_METER_RULES.stream().filter(bruteMeterRule ->
-                        command.matches(bruteMeterRule.getRulePattern())).findFirst();
+                command.matches(bruteMeterRule.getRulePattern())).findFirst();
         return optional.isPresent() ? optional.get() : new BruteMeterRule(command.length(), "*", 0d, 0);
     }
 
@@ -19,11 +19,11 @@ public class BruteMeterAlgorithm extends AbstractRuleAlgorithm implements Comman
     public String validateCommand(String command) {
         BruteMeterRule result = this.hitTheTarget(command);
         return CommandConstants.COMMAND_BRUTE_METER + result.getPasswordLevel().name() + "," +
-                CommandConstants.COMMAND_SYNTACTIC_CONTENT + result.getRulePattern();
+                CommandConstants.COMMAND_SYNTACTIC_CONTENT + result.getRulePattern() + "," + result.getDesc();
     }
 
     @Override
     public PasswordLevel estimatePasswordLevel(String command) {
-        return PasswordLevel.LOW;
+        return this.hitTheTarget(command).getPasswordLevel();
     }
 }

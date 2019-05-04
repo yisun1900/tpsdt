@@ -82,6 +82,16 @@ public interface CommandConstants {
 
     String TIMER_12 = "0[0-9]:[0-5][0-9]|1[0-1]:[0-5][0-9]";
 
+    String HTML_TAG = "<(S*?)[^>]*>.*?|<.*? />";
+
+    String URL = "[a-zA-z]+://[^s]*";
+
+    String INNER_PHONE = "d{3}-d{8}|d{4}-d{7}";
+
+    String QQ_NUM = "[1-9][0-9]{4,}";
+
+    String INNER_CODE = "[1-9]d{5}(?!d) ";
+
     List<BruteMeterRule> BRUTE_METER_RULES = Arrays.asList(
             //SUPER LOW =================================================================================================================
             new BruteMeterRule(NUM09 + "{1,2}", Math.pow(10, 6), "2位纯数字"),
@@ -97,6 +107,11 @@ public interface CommandConstants {
             new BruteMeterRule(DATE, 10d, "日期格式"),
             new BruteMeterRule(TIMER_24, 10d, "24小时"),
             new BruteMeterRule(TIMER_12, 10d, "12小时"),
+            new BruteMeterRule(HTML_TAG, 10d, "HTML标签"),
+            new BruteMeterRule(URL, 10d, "URL"),
+            new BruteMeterRule(INNER_PHONE, 10d, "国内电话"),
+            new BruteMeterRule(QQ_NUM, 10d, "QQ号码"),
+            new BruteMeterRule(INNER_CODE, 10d, "国内邮政编码"),
             new BruteMeterRule(NUM09 + "{4}", 10036d, "4位数字"),
             new BruteMeterRule(AZ_HIGH + AZ_VOWEL, 10081d, "大写字母加元音字母"),
             new BruteMeterRule(NUM09 + "{2}", 10181d, "2位数字"),
@@ -131,7 +146,7 @@ public interface CommandConstants {
             new BruteMeterRule(AZ_VOWEL + AZ_LOW, BruteMeterStandard.LOW, "元音字母加小写字母"),
             new BruteMeterRule(AZ_LOW + AZ_VOWEL + AZ_HIGH, BruteMeterStandard.LOW, "小写字母加元音字母加大写字母"),
             //MEDIUM===================================================================================================================
-            new BruteMeterRule(NUM09 + "{6，8}", BruteMeterStandard.MEDIUM, "8位纯数字"),
+            new BruteMeterRule(NUM09 + "{6,8}", BruteMeterStandard.MEDIUM, "8位纯数字"),
             new BruteMeterRule(AZ_HIGH + "{4}" + AZ_VOWEL, BruteMeterStandard.MEDIUM, "4位大写字母加元音字母"),
             new BruteMeterRule(NUM09 + AZ_VOWEL + "{4}", BruteMeterStandard.MEDIUM, "小写数字加4位元音字母"),
             new BruteMeterRule(NUM09 + AZ_LOW + "{4}", BruteMeterStandard.MEDIUM, "小写数字加4位小写字母"),
@@ -180,6 +195,16 @@ public interface CommandConstants {
     String NA_10 = "(Antoinette|Bloomfield|Catharine|Chesterton|Christiana|Cumberland|Eisenhower|FitzGerald|Galsworthy|Harrington|Huntington|Longfellow|MacDonald|Mackintosh|MacMillan|Montgomery|Richardson|Rutherford|Springhall|Washington|Wilhelmina|Wordsworth)";
     String NA_11 = "(Bartholomew|Burne-Jones|Chamberlain|Christopher|Copperfield|MacPherson|Rockefeller|Shakespeare|Sonmerfield)";
 
+    String NA_3_LOWER = "(Abe|Aly|Ann|Ben|Bob|Dan|Eva|Eve|Fox|Gus|Guy|Hal|Jim|Job|Joe|Kit|Law|Lee|Lew|Max|May|Meg|Peg|Poe|Rob|Roy|Sam|Ted|Tom|Van|Wat)";
+    String NA_4_LOWER = "(Adam|Anna|Anne|Bach|Bart|Beck|Bell|Bert|Bess|Bill|Bray|Buck|Camp|Carl|Davy|Den|Dick|Dodd|Dora|Dutt|Eden|Edie|Ella|Emma|Evan|Fast|Finn|Ford|Fred|Funk|Gill|Gold|Gray|Grey|Hart|Hill|Holt|Hood|Hope|Hugh|Hume|Hutt|Ivan|Jack|Jane|Jean|Joan|Joel|John|Josh|Judd|Lamb|Lena|Lily|Lou|Lucy|Luke|Lyly|Lynd|Mark|Mary|Maud|Mike|Mill|Moll|Mond|More|Nell|Nick|Noah|Noel|Nora|Owen|Paul|Penn|Pope|Reed|Rhys|Rosa|Rose|Rusk|Ruth|Saul|Shaw|Snow|Tate|Toby|Tony|Tout|Vogt|Ward|Watt|Webb|Whit|Wild|Will|Wolf|Wood|Yale|Yule)";
+    String NA_5_LOWER = "(Adams|Adela|Agnes|Aled|Alice|Alick|Bacon|Bauer|Beard|Becky|Belle|Betsy|Betty|Billy|Black|Blake|Bloor|Blume|Bobby|Bowen|Boyle|Broad|Brown|Bruce|Bruno|Bryan|Bryce|Burke|Burns|Byron|Carey|Child|Clara|Clare|Conan|Cook|Crane|Croft|Curme|Daisy|David|Defoe|Delia|Dewar|Dewey|Dolly|Donne|Doris|Doyle|Eddie|Edith|Effie|Eliot|Ellen|Ellis|Elsie|Emily|Eugen|Evans|Fanny|Felix|Field|Flynn|Frank|Gard|Giles|Gosse|Grace|Grant|Green|Grote|Hardy|Harry|Harte|Haydn|Henry|Herty|Hicks|Hodge|Hosea|House|Hoyle|Isaac|Jacob|James|Jenny|Jerry|Jimmy|Jonah|Jones|Joule|Joyce|Julia|Katte|Keats|Kell|Kitto|Kitty|Leigh|Lewis|Lloyd|Locke|Louis|Lucas|Lucia|Lynch|Madge|Malan|Maltz|Maria|Micah|Milne|Moore|Morse|Moses|Nahum|Nancy|Nelly|Nico|Nixon|North|Noyes|Occam|Oscar|Pansy|Pater|Peggy|Pepys|Peter|Petty|Piers|Pigou|Polly|Pound|Price|Pritt|Ralph|Raman|Reade|Robin|Roger|Romeo|Sally|Sandy|Sapir|Sara|Scott|Sharp|Silas|Simon|Smith|Sophy|Stone|Stowe|Susan|Sweet|Swift|Terry|Titus|Tommy|Tours|Tracy|Twain|Tyler|Walsh|Wells|Whyet|Wilde|Woolf|Wyat|Wyld|Young)";
+    String NA_6_LOWER = "(Abbot|Adolph|Albert|Alcott|Alfred|Alsop|Amelia|Andrew|Arnold|Arthur|Attlee|Austen|Austin|Barney|Barrie|Barton|Becher|Belloc|Benson|Bernal|Bertha|Bertie|Bessie|Bowman|Bright|Bronte|Brooke|Browne|Buckle|Bulwer|Bunyan|Butler|Carmen|Carrie|Carter|Childe|Christ|Church|Cissie|Clark|Cocker|Coffey|Connie|Connor|Conrad|Cooper|Cotton|Cowper|Crofts|Cronin|Dalton|Daniel|Darwin|Dickey|Dillon|Dobbin|Dryden|DuBois|Dulles|Dunbar|Duncan|Dunlop|Dupont|Edison|Edmund|Edward|Elinor|Emmie|Ernest|Esther|Eugene|Felton|Flower|Foster|Fowler|Gallup|Garcia|Garden|George|Gibbon|Gibson|Godwin|Gracie|Graham|Gunter|Haggai|Hamlet|Hansen|Hansom|Harold|Harper|Harrod|Harvey|Hearst|Helin|Henley|Hobbes|Hobson|Holmes|Hoover|Horace|Hornby|Howard|Hudson|Hughes|Huxley|Irving|Isabel|Isaiah|Jasper|Jeames|Jeremy|Jerome|Jessie|Johnny|Jonson|Jordan|Joseph|Joshua|Judith|Judson|Julian|Juliet|Julius|Kelsen|Kelvin|Kennan|Keppel|Keynes|Landon|Larkin|Laurie|Lawson|Lizzie|London|Louisa|Louise|Lowell|Lucius|Lytton|Maggie|Malory|Marcus|Marion|Marner|Martha|Martin|Milton|Minnie|Monroe|Morgan|Morley|Morris|Morton|Motley|Murray|Nelson|Newman|Newton|Norris|Norton|Oliver|O’Neil|Onions|Palmer|Parker|Perkin|Philip|Pitman|Powell|Pullan|Raglan|Rhodes|Robert|Roland|Ruskin|Salome|Samson|Samuel|Sander|Sawyer|Saxton|Senior|Sidney|Sophia|Steele|Stella|Strong|Stuart|Surrey|Symons|Taylor|Temple|Thomas|Tobias|Toland|Truman|Turner|Tuttle|Veblen|Victor|Violet|Wagner|Walker|Wallis|Walter|Walton|Warner|Warren|Waters|Wesley|Wilcox|Wilson|Wright|Yeates|Yerkes)";
+    String NA_7_LOWER = "(Abraham|Acheson|Addison|Anthony|Antonia|Babbitt|Baldwin|Barnard|Barrett|Bellamy|Bennett|Bentham|Bernard|Bertram|Bethune|Birrell|Bloomer|Boswell|Bradley|Bridges|Camilla|Carroll|Chaplin|Chapman|Charles|Charley|Charles|Chaucer|Christy|Clapham|Clemens|Clement|Collins|Commons|Craigie|Daniell|Dickens|Doherty|Dorothy|Dierser|Eleanor|Electra|Emerson|Evelina|Ezekiel|Faraday|Forster|Frances|Francis|Freeman|Gabriel|Gaskell|Geordie|Gilbert|Gissing|Gregory|Gresham|Gunther|Halifax|Haywood|Hazlitt|Herbert|Hewlett|Hodgson|Hopkin|Horatio|Housman|Houston|Howell|Hubbard|Huggins|Humphr|Jackson|Jenkin|Johnson|Juliana|Katrine|Kellogg|Kennedy|Kipling|Lambert|Leacock|Leonard|Leopold|Lincoln|Lindsay|Longman|MacAdam|Malachi|Malthus|Margery|Marjory|Marlowe|Matthew|Maugham|Maurice|Maxwell|Michael|Moulton|Needham|Nichol|Obadiah|O’Casey|Orlando|Patrick|Peacock|Pearson|Pollitt|Pullman|Quiller|Raleign|Ramsden|Raphael|Raymond|Rebecca|Ricardo|Richard|Robbins|Robeson|Russell|Saroyan|Sassoon|Scripps|Service|Shelley|Simpson|Smedley|Southey|Spencer|Spender|Spenser|Stephen|Susanna|Thodore|Theresa|Thomson|Thoreau|Timothy|Toynbee|Ulysses|Vaughan|Vincent|Walkley|Wallace|Walpole|Webster|Wheeler|Whitman|Willard|William|Wilmot|Windsor|Woolley|Wyclif)";
+    String NA_8_LOWER = "(Adelaide|Aldridge|Anderson|Arabella|Augustus|Bartlett|Beaufort|Beerbohm|Benedict|Benjamin|Berkeley|Bessemer|Brewster|Browning|Carllyle|Carnegie|Caroline|Cecillia|Christie|Clarissa|Congreve|Crichton|Cromwell|Dorothea|Douglas|Eipstein|Euphemia|Eveline|Faulkner|Ferguson|Fielding|Franklin|Geoffrey|Grantham|Habakkuk|Hamilton|Harriman|Harrison|Jennings|Jeremiah|Jonathan|Kathleen|Kingsley|Lancelot|Lawrence|Leighton|Macaulay|Margaret|Marshall|Mathilda|McCarthy|McDonald|Melville|Meredith|Morrison|Nehemiah|Nicholas|O’Connor|Patience|Philemon|Pulitzer|Rayleign|Reynolds|Richards|Robinson|Rosalind|Rossetti|Rudolph|Sheridan|Sherwood|Sinclair|Smollett|Stephens|Stilwell|Strachey|Tennyson|Thompson|Trollpoe|Virginia|Wheatley|Whittier|Winifred|Wodehous|Zangwill)";
+    String NA_9_LOWER = "(Ackerman|Aldington|Alexander|Archibald|Armstrong|Augustine|Carpenter|Charlotte|Christian|Churchill|Colclough|Coleridge|Constance|Coverdale|DeQuincey|Edgeworth|Elizabeth|Ferdinand|Frederick|Galbraith|Gallacher|Gladstone|Goldsmith|Hawthorne|Hemingway|Henrietta|Ingersoll|Jefferson|Johnston|Katharine|Lattimore|Lindberg|MacArthur|Mansfield|Marcellus|Masefield|Michelson|Middleton|Nathaniei|Partridge|Priestley|Roosevelt|Sainsbury|Sailsbury|Steinbeck|Stevenson|Swinburne|Thackeray|Thorndike|Tomlinson|Trevelyan|Valentine|Whitehead|Wollaston|Zacharias|Zechariah|Zephaniah|Zimmerman)";
+    String NA_10_LOWER = "(Antoinette|Bloomfield|Catharine|Chesterton|Christiana|Cumberland|Eisenhower|FitzGerald|Galsworthy|Harrington|Huntington|Longfellow|MacDonald|Mackintosh|MacMillan|Montgomery|Richardson|Rutherford|Springhall|Washington|Wilhelmina|Wordsworth)";
+    String NA_11_LOWER = "(Bartholomew|Burne-Jones|Chamberlain|Christopher|Copperfield|MacPherson|Rockefeller|Shakespeare|Sonmerfield)";
+
     String HeatWord_4 = "(.com|.com|0000|0123|1111|1212|1234|1234|1313|1314|1969|1973|1975|1976|1977|1978|1979|1980|1981|1982|1982|1983|1983|1984|1984|1985|1985|1986|1986|1987|1987|1988|1988|1989|1989|1990|1990|1991|1991|1992|1993|1994|1995|1996|1997|1998|2000|2000|2001|2002|2003|2004|2005|2005|2006|2006|2007|2007|2008|2008|2009|2009|2010|2010|2012|2345|3000|3344|4321|4eva|4lyf|6969|8888|Abcd|Alex|Amor|Asdf|Babe|Baby|Baby|Blue|CSDN|Chao|Chen|Cool|Cute|Dong|Ever|Fang|Feng|Fuck|Girl|Gurl|Haha|Hong|Java|Jian|Jing|John|Juan|King|King|LOVE|Life|Ling|Long|Love|Love|Ming|Peng|Ping|Pink|Pogi|Qing|Quan|Rock|Rong|Rose|Ryan|Sexy|Song|Star|Tian|Ting|Xiao|Xing|Yang|Ying|Yong|Yuan|Zhao|Zhou|_123|bear|bebe|best|csdn|e123|fuck|head|jack|jade|jane|jose|lady|luis|mama|paul|rule|s123|wang)";
     String HeatWord_5 = "(12345|4ever|4life|Admin|Apple|Smile|TEAMO|Zhang|angel|bitch|james|jesus|lover|rocks|rules|teamo)";
     String HeatWord_6 = "(100200|112358|123123|123321|159357|159753|456852|666888|753951|789456|951753|abc123|beyond|dragon|hacker|shmily|woaini)";
@@ -205,11 +230,21 @@ public interface CommandConstants {
             new HeatStructureRule(NA_3, Math.pow(10, 7), "3位名字"),
             new HeatStructureRule(NA_4, Math.pow(10, 7), "4位名字"),
             new HeatStructureRule(NA_5, Math.pow(10, 7), "5位名字"),
+            new HeatStructureRule(NA_6, Math.pow(10, 7), "6位名字"),
             new HeatStructureRule(NA_7, Math.pow(10, 7), "7位名字"),
             new HeatStructureRule(NA_8, Math.pow(10, 7), "8位名字"),
             new HeatStructureRule(NA_9, Math.pow(10, 7), "9位名字"),
             new HeatStructureRule(NA_10, Math.pow(10, 7), "10位名字"),
             new HeatStructureRule(NA_11, Math.pow(10, 7), "11位名字"),
+            new HeatStructureRule(NA_3_LOWER, Math.pow(10, 7), "3位小写名字"),
+            new HeatStructureRule(NA_4_LOWER, Math.pow(10, 7), "4位小写名字"),
+            new HeatStructureRule(NA_5_LOWER, Math.pow(10, 7), "5位小写名字"),
+            new HeatStructureRule(NA_6_LOWER, Math.pow(10, 7), "6位小写名字"),
+            new HeatStructureRule(NA_7_LOWER, Math.pow(10, 7), "7位小写名字"),
+            new HeatStructureRule(NA_8_LOWER, Math.pow(10, 7), "8位小写名字"),
+            new HeatStructureRule(NA_9_LOWER, Math.pow(10, 7), "9位小写名字"),
+            new HeatStructureRule(NA_10_LOWER, Math.pow(10, 7), "10位小写名字"),
+            new HeatStructureRule(NA_11_LOWER, Math.pow(10, 7), "11位小写名字"),
             new HeatStructureRule(HeatWord_4, Math.pow(10, 7), "4位热词"),
             new HeatStructureRule(HeatWord_5, Math.pow(10, 7), "5位热词"),
             new HeatStructureRule(HeatWord_6, Math.pow(10, 7), "6位热词"),
