@@ -9,6 +9,12 @@ import lombok.Setter;
 @Setter
 public class HeatStructureRule extends CommonRule {
 
+    public HeatStructureRule(String rulePattern, Double totalSpace, String desc) {
+        this.rulePattern = rulePattern;
+        this.totalSpace = totalSpace;
+        this.desc = desc;
+    }
+
     public HeatStructureRule(Integer length, String rulePattern, Double totalSpace, Integer order) {
         this.order = order;
         this.length = length;
