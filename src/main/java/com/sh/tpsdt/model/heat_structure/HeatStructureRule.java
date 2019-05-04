@@ -15,7 +15,8 @@ public class HeatStructureRule extends CommonRule {
         this.evaluatePasswordLevel();
     }
 
-    public HeatStructureRule(Integer length, String rulePattern, Double totalSpace, Integer order) {
+    public HeatStructureRule(Integer length, String rulePattern, Double totalSpace, Integer order, String desc) {
+        this.desc = desc;
         this.order = order;
         this.length = length;
         this.rulePattern = rulePattern;

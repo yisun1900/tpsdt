@@ -15,7 +15,8 @@ public class BruteMeterRule extends CommonRule {
         this.evaluatePasswordLevel();
     }
 
-    public BruteMeterRule(Integer length, String rulePattern, Double totalSpace, Integer order) {
+    public BruteMeterRule(Integer length, String rulePattern, Double totalSpace, Integer order, String desc) {
+        this.desc = desc;
         this.order = order;
         this.length = length;
         this.rulePattern = rulePattern;

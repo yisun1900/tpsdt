@@ -12,14 +12,14 @@ public class BruteMeterAlgorithm extends AbstractRuleAlgorithm implements Comman
     public BruteMeterRule hitTheTarget(String command) {
         Optional<BruteMeterRule> optional = CommandConstants.BRUTE_METER_RULES.stream().filter(bruteMeterRule ->
                 command.matches(bruteMeterRule.getRulePattern())).findFirst();
-        return optional.isPresent() ? optional.get() : new BruteMeterRule(command.length(), "*", 0d, 0);
+        return optional.isPresent() ? optional.get() : new BruteMeterRule(command.length(), "*", 0d, 0,"No pattern match!");
     }
 
     @Override
     public String validateCommand(String command) {
         BruteMeterRule result = this.hitTheTarget(command);
         return CommandConstants.COMMAND_BRUTE_METER + result.getPasswordLevel().name() + "," +
-                CommandConstants.COMMAND_SYNTACTIC_CONTENT + result.getRulePattern() + "," + result.getDesc();
+                CommandConstants.COMMAND_SYNTACTIC_CONTENT + result.getDesc();
     }
 
     @Override

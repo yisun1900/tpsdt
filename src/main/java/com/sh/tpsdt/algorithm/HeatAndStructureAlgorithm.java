@@ -13,14 +13,14 @@ public class HeatAndStructureAlgorithm extends AbstractRuleAlgorithm<HeatStructu
     protected HeatStructureRule hitTheTarget(String command) {
         Optional<HeatStructureRule> optional = CommandConstants.HEAT_STRUCTURE_RULES.stream().filter(heatStructureRule ->
                 command.matches(heatStructureRule.getRulePattern())).findFirst();
-        return optional.isPresent() ? optional.get() : new HeatStructureRule(command.length(), "*", 0d, 0);
+        return optional.isPresent() ? optional.get() : new HeatStructureRule(command.length(), "*", 0d, 0, "No pattern match!");
     }
 
     @Override
     public String validateCommand(String command) {
         HeatStructureRule result = this.hitTheTarget(command);
         return CommandConstants.COMMAND_HEAT_STRUCTURE_TITLE + result.getPasswordLevel().name() + "," +
-                CommandConstants.COMMAND_SYNTACTIC_CONTENT + result.getRulePattern() + "," + result.getDesc();
+                CommandConstants.COMMAND_SYNTACTIC_CONTENT + result.getDesc();
     }
 
     @Override
